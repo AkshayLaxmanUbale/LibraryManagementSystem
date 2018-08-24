@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="homeApp">
+<head>
+<meta charset="UTF-8">
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+
+<title>Library Management System</title>
+
+<base href="http://localhost:4005/LibrarySystem/">
+</head>
+<body>
+
+
+	<div class="container-fluid row" style="width: auto;height: 100px;">
+		<div class="col-md-2" style="padding-left: 100px;padding-top: 20px">
+			<img src="./views/images/library.jpg" alt="Library" style="width: 100px;height: 100px" />
+		</div>
+		<div class="col-md-10">
+			<h1 style="align-self: right;padding-top: 40px">LIBRARY MANAGEMENT SYSTEM</h1>
+		</div>
+	</div> 
+	
+	<div class="container-fluid" style="margin-top: 25px;height:3px;width: 100%;background-color: black"> </div>
+
+	<div class="container-fluid row">
+		<div class="col-md-3" style="height: 500px;padding: 50px">
+			<font size="4">
+				<div style="border-right: black solid 2px;padding-right: 5px">
+
+				<a href="./#/bookAddition"> <button type="button" class="btn btn-outline-primary" style="width: 100%;height: 40px;font-size: 20px;margin-top: 5px;"><span class="glyphicon glyphicon-chevron-up"></span><label style="margin-left: 10px">Issue Book</label></button></a>
+
+				<a href="./#/bookEnquiry">  <button type="button" class="btn btn-outline-primary" style="width: 100%;height: 40px;font-size: 20px;margin-top: 5px"><span class="glyphicon glyphicon-chevron-down"></span><label style="margin-left: 10px">Return Book</label></button></a>
+
+				<a href="./#/bookEnquiry"> <button type="button" class="btn btn-outline-primary" style="width: 100%;height: 40px;font-size: 20px;margin-top: 5px"><span class="glyphicon glyphicon-zoom-in"></span><label style="margin-left: 10px">Enquiry About Book</label></button></a>
+
+				<a href="./#/bookAddition"> <button type="button" class="btn btn-outline-primary" style="width: 100%;height: 40px;font-size: 20px;margin-top: 5px"><span class="glyphicon glyphicon-plus"></span><label style="margin-left: 10px">Add New Books</label></button></a>
+				</div>
+			</font>
+		</div>
+
+		<div class="col-md-9" style="padding: 50px">
+			<div ng-view>
+			
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="./views/scripts/app.js"></script>
+</body>
+
+</html>

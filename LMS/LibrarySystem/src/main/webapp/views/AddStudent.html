@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<meta charset="UTF-8">
+
+
+<script>
+	var app = angular.module('student', []);  
+	app.service("StudentService",['$http', function($http){
+		this.addStudent = function addStudent(student){
+			
+			var data = angular.toJson(student);
+			var config = {
+	                headers : {
+	                	'Accept':'application/json',
+	                    'Content-Type': 'application/json'
+	                }
+	            }
+			return $http.post(
+				'/LibrarySystem/addStudent',data,config
+			);
+		};
+		this.getStudents = function getStudents(){
+			return $http.get('/LibrarySystem/getAllStudents'
+			).then(function(response){
+				return response.data;
+			});
+		};
+	}]);
+	
+	app.controller("stuCtrl",['$scope','StudentService', function($scope,StudentService){
+		$scope.submitted = false;
+		$scope.errorMessage = '';
+		$scope.saveStudent = function() {
+	        $scope.submitted = true;
+	          if ($scope.studentform.$valid) {
+	            StudentService.addStudent($scope.student)
+	              .then (function success(response) {
+	                  $scope.getAll();
+	                  $scope.user = null;
+	                  $scope.errorMessage = 'User added!';
+	                  $scope.submitted = false;
+	              },
+	              function error(response) {
+	                  if (response.status == 409) {
+	                    $scope.errorMessage = response.data.message;
+	                  }
+	                  else {
+	                    $scope.errorMessage = 'Error adding user!';
+	                  }
+	                  
+	            });
+	          }
+	    }
+		
+		$scope.getAll = function() {
+	           StudentService.getStudents().then(function(data) {
+	               $scope.students = data;
+	           });
+	       }
+		
+		//$scope.getAll();
+	}]);
+	
+</script>
+<title>Student Addition</title>
+</head>
+<body>
+	<h2>Student Addition FOrm</h2>
+	
+	<div ng-app="student" ng-controller="stuCtrl">
+			<label>{{errorMessage}}</label>
+		<form name="studentform" method="POST" ng-submit="saveStudent()" novalidate>
+			Roll no: <input type="number" ng-model="student.rollno"/>
+			Name : <input type="text" ng-model="student.name"/>
+			Major : <input type="text" ng-model="student.major"/>
+			Year : <input type="number" ng-model="student.year"/>
+			Div : <input type="number" ng-model="student.div"/>
+			
+			<button type="submit">Submit</button>
+		</form>
+		
+		<table>
+  			<tr ng-repeat="x in students">
+    			<td>{{ x.rollno }}</td>
+    			<td>{{ x.name }}</td>
+  			</tr>
+		</table>
+		
+	</div>
+</body>
+</html>

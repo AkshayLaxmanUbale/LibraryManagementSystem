@@ -1,0 +1,15 @@
+<div class="modal-header">
+<h3 class="modal-title">Header</h3>
+</div>
+<div class="modal-body">
+	Popup for issue Book
+	<form novalidate ng-submit="issue()">
+		<input type="number" name="rollno" id="rollno" ng-model="student.rollno"/>
+		<button type="submit">Issue</button>
+	</form>
+</div>
+<div class="modal-footer">
+<button class="btn btn-warning" type="button"
+ng-click="close()">Cancel</button>
+</div>
+
