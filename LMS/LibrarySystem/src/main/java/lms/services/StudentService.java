@@ -36,7 +36,7 @@ public class StudentService {
 	
 	public Student findStudent(Student student) {
 		Query query = new Query(Criteria.where("_id").is(student.getRollno()));
-		return (Student) mongoTemplate.find(query, Student.class);
+		return (Student) mongoTemplate.findOne(query, Student.class);
 	}
 	
 	public List<Student> getAllStudents(){

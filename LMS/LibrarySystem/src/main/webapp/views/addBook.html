@@ -36,10 +36,15 @@
 <body>
 	"^(?:ISBN(?:-10)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$"   -> ISBN Regex
 -->
-
-	<div>
+		
+	<button class="btn btn-default" style="width:200px;margin-bottom: 30px" ng-click="HideBookAddForm =!HideBookAddForm" >
+		ADD BOOK
+	</button>
+	
+	<div ng-hide="HideBookAddForm" ng-init="HideBookAddForm=true">
+	
 		<fieldset>
-			<legend style="font-size: 30px">Details About Book:</legend>		
+			<legend style="font-size: 30px">Add Details About Book:</legend>		
 		</fieldset>
 		<label style="color:blue">{{messege}}</label>
 		<form name="bookForm" method="post" novalidate ng-submit="saveBook()" style="width: 600px">
@@ -79,6 +84,36 @@
 		</form>
 		
 	</div>
+	
+	
+	<div style="margin-top: 30px">
+		<label style="font-size: 24px">All Books:</label>
+	</div>
+	<div class="container-fluid row">
+			<div class="container-fluid col-md-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>ISBN</th>
+							<th>Title</th>
+							<th>Author</th>
+							<th>No of copies</th>
+							<th>Remaining Copies</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="book in books">
+						<tr>
+							<td>{{book.isbn}}</td>
+							<td>{{book.title}}</td>
+							<td>{{book.author}}</td>
+							<td>{{book.total_copies}}</td>
+							<td>{{book.rem_copies}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
 
 <!--
 </body>

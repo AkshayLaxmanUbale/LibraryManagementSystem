@@ -1,0 +1,162 @@
+<div>
+	<!-- roll number input form -->
+	<div>
+		<fieldset>
+			<legend style="font-size: 30px">Issue/Return Book</legend>
+		</fieldset>
+		<form class="form-inline" name="searchForm" method="post" novalidate
+			ng-submit="findStudentProfile()"
+			style="border: black solid 1px; padding: 5px; width: 600px">
+			<input type="text" class="form-control" id="rollno" name="rollno"
+				placeholder="Roll number of student" style="width: 400px"
+				ng-model="rollno" ng-pattern="/\b\d{4}\b/g" required />
+			<button type="submit" class="btn"
+				style="margin-left: 20px; width: 150px">Search</button>
+			<div ng-if="submitted || searchForm.rollno.$dirty"
+				ng-messages="searchForm.rollno.$error" style="color: red">
+				<div ng-message="required">Enter roll number</div>
+				<div ng-message="pattern">roll no. must be 4 digit number</div>
+			</div>
+
+		</form>
+	</div>
+	<label style="color: blue">{{errmsg}}</label>
+	<!-- for student details -->
+	<div ng-hide="studentprofile" style="margin-top: 20px">
+		<fieldset>
+			<legend style="font-size: 30px">Student Profile</legend>
+		</fieldset>
+		<div>
+			<label style="font-size: 24px">Academic Information</label>
+		</div>
+		<div class="container-fluid row">
+			<div class="container-fluid col-md-2"
+				style="border: 2px solid black; height: 200px; padding: 2px">
+				<div style="border: 1px solid black; height: 192px;">
+					<img src="./views/images/profile.png"
+						style="width: 96%; height: 96%" />
+				</div>
+			</div>
+			<div class="col-md-6" style="height: 200px; margin-left: 30px">
+				<table class="table table-condensed">
+					<tr>
+						<td><label style="font-size: 14px">Roll no.</label></td>
+						<td style="font-size: 14px">{{student.rollno}}</td>
+					</tr>
+					<tr>
+						<td><label style="font-size: 14px">Name</label></td>
+						<td style="font-size: 14px">{{student.name}}</td>
+					</tr>
+					<tr>
+						<td><label style="font-size: 14px">Major</label></td>
+						<td style="font-size: 14px">{{student.major}}</td>
+					</tr>
+					<tr>
+						<td><label style="font-size: 14px">Division</label></td>
+						<td style="font-size: 14px">{{student.div}}</td>
+					</tr>
+					<tr>
+						<td><label style="font-size: 14px">Year of Study</label></td>
+						<td style="font-size: 14px">{{student.year}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div style="margin-top: 30px">
+			<label style="font-size: 24px">Current Issued Books:</label>
+		</div>
+		<div class="container-fluid row">
+			<div class="container-fluid col-md-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>ISBN</th>
+							<th>Title</th>
+							<th>Issued Date</th>
+							<th>Expected Return Date</th>
+							<th>Return Option</th>
+
+						</tr>
+					</thead>
+					<tbody ng-repeat="issue in issues">
+						<tr>
+							<td>{{issue.isbn}}</td>
+							<td>{{issue.title}}</td>
+							<td>{{issue.issuedate}}</td>
+							<td>{{issue.returndate}}</td>
+							<td style="width: 300px"><div class="row">
+									<div class="col-sm-4">
+										<button class="btn btn-danger" ng-click="calcFine(issue)">Fine</button>
+									</div>
+									<div class="col-sm-8" ng-hide="returnbtn">
+										<label>{{issue.fine}} Rs.</label>
+										<button class="btn btn-danger" ng-click="returnBook(issue)">Return</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-1">
+				<button class="btn btn-submit" ng-click="showform()">(+)Issue
+					Book</button>
+			</div>
+			<div class="col-md-8" style="margin-left: 30px"
+				ng-hide="issueFormShow">
+				<form class="form-inline" name="bookform" method="post" novalidate
+					ng-submit="issueBook()"
+					style="border: black solid 1px; padding: 5px; width: 600px">
+					<input type="text" class="form-control" id="isbn" name="isbn"
+						placeholder="ISBN of Book" style="width: 400px" ng-model="isbn"
+						ng-pattern="/\b\d{5}\b/g" required />
+					<button type="submit" class="btn"
+						style="margin-left: 20px; width: 150px">Issue</button>
+					<div ng-if="submitted || bookform.isbn.$dirty"
+						ng-messages="bookform.isbn.$error" style="color: red">
+						<div ng-message="required">Enter ISBN number</div>
+						<div ng-message="pattern">ISBN must be 5 digit number</div>
+					</div>
+
+				</form>
+			</div>
+
+
+		</div>
+		<div style="margin-top: 30px">
+			<label style="font-size: 24px">Book Issue History:</label>
+		</div>
+		<div class="container-fluid row">
+			<div class="container-fluid col-md-8">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>ISBN</th>
+							<th>Title</th>
+							<th>Issued Date</th>
+							<th>Return Date</th>
+							<th>Fine</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat="issue in issuehistory">
+						<tr>
+							<td>{{issue.isbn}}</td>
+							<td>{{issue.title}}</td>
+							<td>{{issue.issuedate}}</td>
+							<td>{{issue.returndate}}</td>
+							<td>{{issue.fine}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>

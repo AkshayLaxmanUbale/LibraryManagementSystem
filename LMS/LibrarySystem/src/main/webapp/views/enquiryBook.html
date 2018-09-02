@@ -7,75 +7,77 @@
 </head>
 <body>
 -->
-	<div>
-		<fieldset>
-			<legend style="font-size: 30px">Enquiry About Book</legend>		
-		</fieldset>
+<div>
+	<fieldset>
+		<legend style="font-size: 30px">Enquiry About Book</legend>
+	</fieldset>
 
-		<form class="form-inline" name="searchForm" method="post" novalidate ng-submit="findBook()" style="border: black solid 1px;padding: 5px;width: 600px ">
-				<input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN of book" style="width: 400px" ng-model="isbn" ng-pattern="/\b\d{5}\b/g" required/> 
-				<button type="submit" class="btn" style="margin-left: 20px;width: 150px">Search</button>
-				<div ng-if="submitted || searchForm.isbn.$dirty" ng-messages="searchForm.isbn.$error" style="color: red">
-  					<div ng-message="required">Enter ISBN number</div>
-  					<div ng-message="pattern">ISBN must be 5 digit number</div>
-  				</div>
-				
-		</form>
-		<br>
-				
-		<label style="color:blue">{{messege}}</label>
-		<br>
-
-		
-		<div style="width:600px;margin-top: 20px" ng-hide="available"> <!--ng-hide="expression"  for visibility control-->
-		<label style="font-size: 25px;">Book Details:</label>
-			<table class="table table-bordered">
-				<tr>
-					<td>
-						<label style="font-size: 20px">ISBN</label>
-					</td>
-					<td style="font-size: 20px">
-						{{book.isbn}}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label style="font-size: 20px">Title</label>
-					</td>
-					<td style="font-size: 20px">
-						{{book.title}}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label style="font-size: 20px">Author</label>
-					</td>
-					<td style="font-size: 20px">
-						{{book.author}}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label style="font-size: 20px">Total Copies</label>
-					</td>
-					<td style="font-size: 20px">
-						{{book.total_copies}}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label style="font-size: 20px">Remaining copies</label>
-					</td>
-					<td style="font-size: 20px">
-						{{book.rem_copies}}
-					</td>
-				</tr>
-			</table>
-			<button class="btn btn-default" style="width: 200px;height: 50px;margin-left: 100px;font-size: 20px;" ng-click="issueBook()">Issue Book</button>
+	<form class="form-inline" name="searchForm" method="post" novalidate
+		ng-submit="findBook()"
+		style="border: black solid 1px; padding: 5px; width: 600px">
+		<input type="text" class="form-control" id="isbn" name="isbn"
+			placeholder="ISBN of book" style="width: 400px" ng-model="isbn"
+			ng-pattern="/\b\d{5}\b/g" required />
+		<button type="submit" class="btn"
+			style="margin-left: 20px; width: 150px">Search</button>
+		<div ng-if="submitted || searchForm.isbn.$dirty"
+			ng-messages="searchForm.isbn.$error" style="color: red">
+			<div ng-message="required">Enter ISBN number</div>
+			<div ng-message="pattern">ISBN must be 5 digit number</div>
 		</div>
-	</div>
 
-	<!--
+	</form>
+	<br> <label style="color: blue">{{messege}}</label> <br>
+
+
+	<div style="width: 600px; margin-top: 20px" ng-hide="available">
+		<!--ng-hide="expression"  for visibility control-->
+		<label style="font-size: 25px;">Book Details:</label>
+		<table class="table table-bordered">
+			<tr>
+				<td><label style="font-size: 20px">ISBN</label></td>
+				<td style="font-size: 20px">{{book.isbn}}</td>
+			</tr>
+			<tr>
+				<td><label style="font-size: 20px">Title</label></td>
+				<td style="font-size: 20px">{{book.title}}</td>
+			</tr>
+			<tr>
+				<td><label style="font-size: 20px">Author</label></td>
+				<td style="font-size: 20px">{{book.author}}</td>
+			</tr>
+			<tr>
+				<td><label style="font-size: 20px">Total Copies</label></td>
+				<td style="font-size: 20px">{{book.total_copies}}</td>
+			</tr>
+			<tr>
+				<td><label style="font-size: 20px">Remaining copies</label></td>
+				<td style="font-size: 20px">{{book.rem_copies}}</td>
+			</tr>
+		</table>
+		<button class="btn btn-default" style="width: 200px; height: 50px; margin-left: 100px; font-size: 20px;" ng-click="HideRollnoForm = !HideRollnoForm">Issue Book</button>
+
+		<form class="form-inline" name="rollnoForm" method="post" novalidate ng-hide="HideRollnoForm"
+			style="border: black solid 1px; padding: 5px; width: 600px">
+			<input type="text" class="form-control" id="rollno" name="rollno"
+				placeholder="Roll number of student" style="width: 400px"
+				ng-model="rollno" ng-pattern="/\b\d{4}\b/g" required /> 
+				<span ng-show="rollnoForm.rollno.$valid"> <a ng-href="./#/issuereturn/{{rollno}}/{{book.isbn}}"><button
+						class="btn btn-default"
+						style="width: 200px; height: 50px; margin-left: 100px; font-size: 20px;">Issue</button></a>
+			</span>
+			<div ng-if="submitted || rollnoForm.rollno.$dirty"
+				ng-messages="searchForm.rollno.$error" style="color: red">
+				<div ng-message="required">Enter roll number</div>
+				<div ng-message="pattern">roll no. must be 4 digit number</div>
+			</div>
+
+		</form>
+
+	</div>
+</div>
+
+<!--
 </body>
 </html>
 -->
